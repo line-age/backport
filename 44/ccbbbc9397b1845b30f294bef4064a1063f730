@@ -1,0 +1,21 @@
+.github/CODEOWNERS
+  s_ec024a9d890d05::t_1605d043256740 1
+README.md
+  s_ec024a9d890d05::t_ce7ebe68462c28 10-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "44ccbbbc9397b1845b30f294bef4064a1063f730",
+  "prompts": {},
+  "sessions": {
+    "s_ec024a9d890d05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "77d56632-cbf1-42f8-80ea-f86039a93beb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Nick Marden <nmarden@avvo.com>"
+    }
+  }
+}
