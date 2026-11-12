@@ -6,7 +6,30 @@ and the data `review` starts iterating on.
 
 How the GeoPackage maps onto the model is in `store`'s
 [docs/plan.md](https://github.com/line-age/store/blob/main/docs/plan.md#how-the-geopackage-maps-onto-the-model);
-this page is about the import itself.
+this page is about the import itself. The importer is `src/backport/natural_gas.py`.
+
+## Running it
+
+```sh
+# in store: a token for backport that may write claims asserted by the tracers
+uv run lineage-store token create backport --pipeline backport@<sha> --assert-for-others
+
+# here
+export LINEAGE_STORE_URL=http://localhost:8000 LINEAGE_TOKEN=lgt_...
+uv run backport-natural-gas natural_gas.gpkg "Natural Gas Traces" natural_gas_tracers.yaml --stitch-version <trace sha>
+uv run backport-natural-gas-check natural_gas.gpkg
+```
+
+The tracer file names the person behind each tracer code, with a GitHub login where they
+have one (`alex: {name: Alex Example, github: alexexample}`), so someone who traced and
+later reviews is one agent. It is the research partner's, kept next to the traces, and the
+import stops if a code is missing from it. Running the import again changes nothing; edit
+the tracer file and rerun to add a GitHub login to an existing tracer.
+
+On the real data (2026-11-12): 2,324 sections (46 read back whole after a split), 182
+removals, 90 proposed links, 12,637 rows in 9 seconds; a second run created none. The check
+found every traced line drawn from the right year, all 2,372 rows of the GeoPackage drawn
+(proposed cut pieces included), every proposed end in the right year, and 90 of 90 links.
 
 ## The input
 
@@ -15,7 +38,7 @@ theirs, so it never goes in this repo (L-0009); the importer takes a path.
 
 | Layer | Rows | What it is |
 | --- | --- | --- |
-| `pipelines` | 2,372 | 679 lines from the 1929 base trace and 1,693 added in sixteen sheet-to-sheet periods to 1997; 94 of the rows are pieces of 48 lines split where a removal was matched to part of them |
+| `pipelines` | 2,372 | 679 lines from the 1929 base trace and 1,693 added in sixteen sheet-to-sheet periods to 1997; 94 of the rows are pieces of 46 lines split where a removal was matched to part of them (two were split twice) |
 | `removals` | 182 | lines the tracers marked as gone between two sheets; 51 matched to a traced line, 33 partly, 98 not at all |
 | `sheets` | 17 | the date used for each period boundary, and the text on the sheet it came from |
 
