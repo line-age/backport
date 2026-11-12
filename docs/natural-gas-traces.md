@@ -38,10 +38,13 @@ What the stitch left out, on purpose:
    `commodity` and a `status: operational` claim with its `existed_from`, all cited to the
    sheet it first appears on.
 4. **Removals.** One section per removal, with a `route` claim cited to the earlier sheet
-   and an end of `status` cited to the later one.
-5. **Proposed links.** Each match the stitch proposed becomes a `same_as` (matched) or
-   `overlaps` (partial) link, status `proposed`, with its score. These are the first
-   things a person reviews.
+   (`map_shows`) and a `status: decommissioned` claim, starting between the two sheet
+   dates, cited to the later one (`map_omits`).
+5. **Proposed links.** Each section the stitch ended becomes one link from the removal,
+   status `proposed`: `same_as` where the whole section ended, `overlaps` where the stitch
+   split it. The score is the stitch's `match_score` (how much of the removal lies along
+   matched lines), which is its confidence, not how much of the section is covered. These
+   are the first things a person reviews.
 6. **External keys** for everything, so a second run updates and does not duplicate.
 
 ## How we know it worked
@@ -50,8 +53,12 @@ What the stitch left out, on purpose:
   extra pieces), 182 removals, 90 proposed links (from the 84 removals that matched something).
 - Every claim has at least one citation, and every row has an audit entry naming the
   agent.
-- `release` v0 rebuilds a GeoPackage that matches the input, split pieces included (rebuilt
-  from the links). This is `store`'s first finish line.
+- The QGIS views match the input, proposed ends and split pieces included (drawn from the
+  links): the same lines appear and disappear in the same years.
+- `release` v0 matches the input as traced: the same 2,324 lines with the same geometry
+  and start dates. It leaves out the proposed ends, because a release ignores anything
+  still proposed (`store` scenarios, case 2). Together these are `store`'s first finish
+  line.
 
 ## Waiting on the research partner
 
