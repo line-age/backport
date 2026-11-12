@@ -21,9 +21,8 @@ backport-natural-gas-check = "backport.natural_gas_check:main"
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [tool.uv.sources]
-# The published half of store (controlplane L-0002). Pinned to the store PR branch until it
-# merges; then to main.
-lineage-model = { git = "https://github.com/line-age/store", subdirectory = "model", branch = "v0-app" }
+# The published half of store (controlplane L-0002).
+lineage-model = { git = "https://github.com/line-age/store", subdirectory = "model", branch = "main" }
 
 [build-system]
 requires = ["hatchling"]

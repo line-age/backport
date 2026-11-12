@@ -143,7 +143,7 @@ dev = [
 requires-dist = [
     { name = "geopandas", specifier = ">=1.0" },
     { name = "httpx", specifier = ">=0.27" },
-    { name = "lineage-model", git = "https://github.com/line-age/store?subdirectory=model&branch=v0-app" },
+    { name = "lineage-model", git = "https://github.com/line-age/store?subdirectory=model&branch=main" },
     { name = "pyogrio", specifier = ">=0.10" },
     { name = "python-ulid", specifier = ">=3" },
     { name = "pyyaml", specifier = ">=6" },
@@ -159,7 +159,7 @@ dev = [
 [[package]]
 name = "lineage-model"
 version = "0.1.0"
-source = { git = "https://github.com/line-age/store?subdirectory=model&branch=v0-app#abf3ef47bf3dec5bbb799cfc08cba072c95b0bd6" }
+source = { git = "https://github.com/line-age/store?subdirectory=model&branch=main#b712f740edd78655b4bcca23e88d9288ac4bd8a0" }
 dependencies = [
     { name = "pydantic" },
 ]
