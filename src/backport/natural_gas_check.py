@@ -5,7 +5,7 @@ know it worked"), through the store API:
 - every end the stitch proposed is drawn, marked proposed, in the same year;
 - every removal match is a proposed link.
 
-    uv run backport-natural-gas-check natural_gas.gpkg --store http://localhost:8000 --token "$LINEAGE_TOKEN"
+    uv run backport-natural-gas-check natural_gas.gpkg --store http://localhost:47110 --token "$LINEAGE_TOKEN"
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ from .store import Store
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("gpkg", type=Path)
-    ap.add_argument("--store", default=os.environ.get("LINEAGE_STORE_URL", "http://localhost:8000"))
+    ap.add_argument("--store", default=os.environ.get("LINEAGE_STORE_URL", "http://localhost:47110"))
     ap.add_argument("--token", default=os.environ.get("LINEAGE_TOKEN"))
     args = ap.parse_args(argv)
     store = Store(args.store, args.token)

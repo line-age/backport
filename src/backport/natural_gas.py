@@ -11,7 +11,7 @@ partner's and stay outside this org:
     sofia: {name: Sofia Example}
 
     uv run backport-natural-gas natural_gas.gpkg "Natural Gas Traces" natural_gas_tracers.yaml \\
-        --store http://localhost:8000 --token "$LINEAGE_TOKEN" --stitch-version a318e90
+        --store http://localhost:47110 --token "$LINEAGE_TOKEN" --stitch-version a318e90
 
 The token needs `--assert-for-others`, because the claims are the tracers', not backport's.
 Every row carries an external key, so running it again changes nothing.
@@ -245,7 +245,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("gpkg", type=Path, help="the stitched GeoPackage")
     ap.add_argument("traces", type=Path, help='the "Natural Gas Traces" folder it was stitched from')
     ap.add_argument("tracers", type=Path, help="tracer codes -> names and GitHub logins")
-    ap.add_argument("--store", default=os.environ.get("LINEAGE_STORE_URL", "http://localhost:8000"))
+    ap.add_argument("--store", default=os.environ.get("LINEAGE_STORE_URL", "http://localhost:47110"))
     ap.add_argument("--token", default=os.environ.get("LINEAGE_TOKEN"))
     ap.add_argument("--stitch-version", required=True, help="the trace commit that built the GeoPackage")
     args = ap.parse_args(argv)
