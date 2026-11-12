@@ -2,7 +2,7 @@
 name = "lineage-backport"
 version = "0.1.0"
 description = "Lineage import of existing spreadsheets and traces into store"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 dependencies = [
     "lineage-model",
     "geopandas>=1.0",
