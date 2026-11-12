@@ -10,15 +10,24 @@ this page is about the import itself. The importer is `src/backport/natural_gas.
 
 ## Running it
 
-```sh
-# in store: a token for backport that may write claims asserted by the tracers
-uv run lineage-store token create backport --pipeline backport@<sha> --assert-for-others
+The import is a job: one container per run, with the data mounted read-only. Against a
+`store` started with its `docker compose up`:
 
-# here
-export LINEAGE_STORE_URL=http://localhost:8000 LINEAGE_TOKEN=lgt_...
-uv run backport-natural-gas natural_gas.gpkg "Natural Gas Traces" natural_gas_tracers.yaml --stitch-version <trace sha>
-uv run backport-natural-gas-check natural_gas.gpkg
+```sh
+docker build -t lineage-backport .
+TOKEN=$(docker compose -f ../store/compose.yaml exec -T api \
+    lineage-store token create backport --pipeline backport@<sha> --assert-for-others | tail -1)
+
+docker run --rm --network store_default -e LINEAGE_STORE_URL=http://api:8000 -e LINEAGE_TOKEN=$TOKEN \
+    -v /path/to/data:/data:ro lineage-backport \
+    backport-natural-gas /data/natural_gas.gpkg "/data/Natural Gas Traces" /data/natural_gas_tracers.yaml \
+    --stitch-version <trace sha>
+docker run --rm --network store_default -e LINEAGE_STORE_URL=http://api:8000 -e LINEAGE_TOKEN=$TOKEN \
+    -v /path/to/data:/data:ro lineage-backport backport-natural-gas-check /data/natural_gas.gpkg
 ```
+
+A read-only mount makes GDAL warn that the GeoPackage is WAL-enabled; it retries read-only
+and the warning is harmless.
 
 The tracer file names the person behind each tracer code, with a GitHub login where they
 have one (`alex: {name: Alex Example, github: alexexample}`), so someone who traced and
@@ -27,7 +36,8 @@ import stops if a code is missing from it. Running the import again changes noth
 the tracer file and rerun to add a GitHub login to an existing tracer.
 
 On the real data (2026-11-12): 2,324 sections (46 read back whole after a split), 182
-removals, 90 proposed links, 12,637 rows in 9 seconds; a second run created none. The check
+removals, 90 proposed links, 12,637 rows in 9 seconds; a second run created none. The same
+run as containers against store's Compose gave the same result. The check
 found every traced line drawn from the right year, all 2,372 rows of the GeoPackage drawn
 (proposed cut pieces included), every proposed end in the right year, and 90 of 90 links.
 

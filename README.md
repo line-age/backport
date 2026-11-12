@@ -21,6 +21,9 @@ carries an external key, so an import can run again without duplicating anything
 research partner's data never goes in this repo (controlplane L-0009); the commands take
 paths. The tests use made-up data in the same shape.
 
+Every import runs as a container (`Dockerfile`): one job per run, data mounted read-only.
+The import docs show the commands. For working on the code:
+
 ```sh
 uv sync
 uv run pytest
