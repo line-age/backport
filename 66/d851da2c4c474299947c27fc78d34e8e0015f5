@@ -1,0 +1,23 @@
+Dockerfile
+  s_111c4f7ff198f4::t_3569cebde51df3 1-13
+README.md
+  s_111c4f7ff198f4::t_09336744916491 24-26
+docs/natural-gas-traces.md
+  s_111c4f7ff198f4::t_89e0fdb22c5155 13-14,16-26,29-31,39-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "66d851da2c4c474299947c27fc78d34e8e0015f5",
+  "prompts": {},
+  "sessions": {
+    "s_111c4f7ff198f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eb1e86d2-0b65-4658-8723-7a1f0ae8a2dd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Nick Marden <nmarden@avvo.com>"
+    }
+  }
+}
