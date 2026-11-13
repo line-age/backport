@@ -231,7 +231,7 @@ def register_agents(store: Store, tracers: dict[str, dict], codes: set[str], sti
     for code in sorted(codes):
         t = tracers[code]
         agents[code] = str(store.post("/agents", {"kind": "person", "name": t["name"], "github_login": t.get("github"),
-                                                  "external_key": key(f"tracer:{code}")})["id"])
+                                                  "email": t.get("email"), "external_key": key(f"tracer:{code}")})["id"])
     stitch = str(store.post("/agents", {"kind": "pipeline", "name": "stitch",
                                         "pipeline": f"trace/groundtruth/natural_gas/stitch.py@{stitch_version}",
                                         "external_key": key(f"stitch@{stitch_version}")})["id"])
@@ -242,7 +242,7 @@ def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("gpkg", type=Path, help="the stitched GeoPackage")
     ap.add_argument("traces", type=Path, help='the "Natural Gas Traces" folder it was stitched from')
-    ap.add_argument("tracers", type=Path, help="tracer codes -> names and GitHub logins")
+    ap.add_argument("tracers", type=Path, help="tracer codes -> names, emails and GitHub logins")
     ap.add_argument("--store", default=os.environ.get("LINEAGE_STORE_URL", "http://localhost:47110"))
     ap.add_argument("--token", default=os.environ.get("LINEAGE_TOKEN"))
     ap.add_argument("--stitch-version", required=True, help="the trace commit that built the GeoPackage")
