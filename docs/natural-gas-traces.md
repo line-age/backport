@@ -32,8 +32,8 @@ and the warning is harmless.
 The tracer file names the person behind each tracer code, with a GitHub login where they
 have one (`alex: {name: Alex Example, github: alexexample}`), so someone who traced and
 later reviews is one agent. It is the research partner's, kept next to the traces, and the
-import stops if a code is missing from it. Running the import again changes nothing; edit
-the tracer file and rerun to add a GitHub login to an existing tracer.
+import stops if a code is missing from it. Running the import again changes nothing, except
+that a tracer's name or GitHub login edited in the tracer file is updated (store #10).
 
 On the real data (2026-11-12): 2,324 sections (46 read back whole after a split), 182
 removals, 90 proposed links, 12,637 rows in 9 seconds; a second run created none. The same
