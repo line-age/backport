@@ -69,7 +69,7 @@ What the stitch left out, on purpose:
 3. **Sections.** One section per traced line, rebuilt whole: split pieces are grouped by
    `split_from` and the original read from its `source_fid`. Each is on the `gas` network
    and gets a `route` and a `status: operational` claim with its `existed_from`, both cited
-   to the sheet it first appears on. (No `commodity` claim: store has no allowed values for it yet, so it would refuse one.)
+   to the sheet it first appears on.
 4. **Removals.** One section per removal, with a `route` claim cited to the earlier sheet
    (`map_shows`) and a `status: decommissioned` claim, starting between the two sheet
    dates, cited to the later one (`map_omits`).
