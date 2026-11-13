@@ -67,9 +67,9 @@ What the stitch left out, on purpose:
 2. **Agents.** One person agent per tracer code in the filenames, and one pipeline agent for
    the stitch script, at the commit that built the GeoPackage.
 3. **Sections.** One section per traced line, rebuilt whole: split pieces are grouped by
-   `split_from` and the original read from its `source_fid`. Each gets a `route`, a
-   `commodity` and a `status: operational` claim with its `existed_from`, all cited to the
-   sheet it first appears on.
+   `split_from` and the original read from its `source_fid`. Each is on the `gas` network
+   and gets a `route` and a `status: operational` claim with its `existed_from`, both cited
+   to the sheet it first appears on. (No `commodity`: store reserves it.)
 4. **Removals.** One section per removal, with a `route` claim cited to the earlier sheet
    (`map_shows`) and a `status: decommissioned` claim, starting between the two sheet
    dates, cited to the later one (`map_omits`).

@@ -152,8 +152,6 @@ def plan(data: Data, tracer_agents: dict[str, str], stitch_agent: str) -> list[d
         claims = [
             {**common, "ref": f"{t.key}#route", "attribute": "route", "value_geom": mapping(t.geometry),
              "external_key": key(f"{t.key}#route")},
-            {**common, "ref": f"{t.key}#commodity", "attribute": "commodity", "value_text": "natural_gas",
-             "external_key": key(f"{t.key}#commodity")},
             {**common, "ref": f"{t.key}#status", "attribute": "status", "value_text": "operational",
              "external_key": key(f"{t.key}#status")},
         ]
